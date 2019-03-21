@@ -23,8 +23,7 @@
 	  verb_type/2,
 	  word/1
 	],
-	[ % pure
-	]).
+	[assertions, isomodes]).
 
 :- use_module(engine(arithmetic), [(>)/2]).
 
@@ -34,36 +33,63 @@
 
 :- set_prolog_flag(discontiguous_warnings,off).
 
-/*
 % Modes
-:- mode word(+).
-:- mode `(+).
-:- mode conj(+).
-:- mode adverb(+).
-:- mode sup_adj(+,?).
-:- mode rel_adj(+,?).
-:- mode adj(+,?).
-:- mode name_template(+,-).
-:- mode name(+).
-:- mode terminator(+,?).
-:- mode pers_pron(+,?,?,?,?).
-:- mode poss_pron(+,?,?,?).
-:- mode rel_pron(+,?).
-:- mode regular_past(+,?).
-:- mode regular_pres(+).
-:- mode verb_root(+).
-:- mode verb_form(+,?,?,?).
-:- mode noun_sin(+).
-:- mode noun_plu(+,?).
-:- mode noun_form(+,?,?).
-:- mode prep(+).
-:- mode quantifier_pron(+,?,?).
-:- mode tr_number(+,?).
-:- mode number(+,?,?).
-:- mode det(+,?,?,?).
-:- mode int_art(+,?,?,?).
-:- mode int_pron(+,?).
-*/
+% :- mode word(+).
+% :- mode `(+).
+% :- mode conj(+).
+% :- mode adverb(+).
+% :- mode sup_adj(+,?).
+% :- mode rel_adj(+,?).
+% :- mode adj(+,?).
+% :- mode name_template(+,-).
+% :- mode name(+).
+% :- mode terminator(+,?).
+% :- mode pers_pron(+,?,?,?,?).
+% :- mode poss_pron(+,?,?,?).
+% :- mode rel_pron(+,?).
+% :- mode regular_past(+,?).
+% :- mode regular_pres(+).
+% :- mode verb_root(+).
+% :- mode verb_form(+,?,?,?).
+% :- mode noun_sin(+).
+% :- mode noun_plu(+,?).
+% :- mode noun_form(+,?,?).
+% :- mode prep(+).
+% :- mode quantifier_pron(+,?,?).
+% :- mode tr_number(+,?).
+% :- mode number(+,?,?).
+% :- mode det(+,?,?,?).
+% :- mode int_art(+,?,?,?).
+% :- mode int_pron(+,?).
+
+:- pred word(+).
+:- pred `(+).
+:- pred conj(+).
+:- pred adverb(+).
+:- pred sup_adj(+,?).
+:- pred rel_adj(+,?).
+:- pred adj(+,?).
+:- pred name_template(+,-).
+:- pred name(+).
+:- pred terminator(+,?).
+:- pred pers_pron(+,?,?,?,?).
+:- pred poss_pron(+,?,?,?).
+:- pred rel_pron(+,?).
+:- pred regular_past(+,?).
+:- pred regular_pres(+).
+:- pred verb_root(+).
+:- pred verb_form(+,?,?,?).
+:- pred noun_sin(+).
+:- pred noun_plu(+,?).
+:- pred noun_form(+,?,?).
+:- pred prep(+).
+:- pred quantifier_pron(+,?,?).
+:- pred tr_number(+,?).
+:- pred number(+,?,?).
+:- pred det(+,?,?,?).
+:- pred int_art(+,?,?,?).
+:- pred int_pron(+,?).
+
 
 % =================================================================
 % General Dictionary

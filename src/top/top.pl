@@ -1,4 +1,4 @@
-:- module(top, [hi/0, control/3], [datafacts]).
+:- module(top, [hi/0,control/3], [datafacts,assertions,isomodes]).
 % Chat-80 : A small subset of English for database querying.
 % New top for WWW inteface (MH)
 
@@ -226,6 +226,7 @@ irev(I,J,I,J) :- I>J, !.
 irev(I,J,J,I).
 
 %% :- mode check_words(+,-).
+:- pred check_words(+,-).  %% This is false
 
 %% M.H.
 check_words([],[]).
@@ -237,6 +238,7 @@ check_words([WrongWord|Words],[WrongWord|WrongWords]) :-
 	check_words(Words,WrongWords).
 
 %% :- mode check_word(+,-).
+%% :- pred check_word(+,-).
 
 %% M.H.
 %% check_word(Word,Word) :- word(Word).
@@ -252,6 +254,9 @@ check_words([WrongWord|Words],[WrongWord|WrongWords]) :-
 %% Uurgh... Changed to use assert. M.H. 
 
 %% :- mode `=(+,+), =+(+,-), =:(+,?).
+:- pred '`='(+,+).
+%% :- pred '=+'(+,-).
+:- pred '=:'(+,?).
 
 :- data chat_value/2.
 chat_value(tracing,off).
@@ -271,7 +276,7 @@ Var =: Val :-
 %% 	 ;	true), !,
 %%  recordz(Var,val(Val),_).
 %% 
-%% %% This lokks very wrong to me... M.H.
+%% %% This looks very wrong to me... M.H.
 %% Var =+ Val :-
 %%  ( recorded(Var,val(Val0),P), erase(P)
 %% 	; Val0 is 0), !,

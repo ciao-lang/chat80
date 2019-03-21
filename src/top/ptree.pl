@@ -1,5 +1,4 @@
-
-:- module(ptree,[ print_tree/1 ],[ ]).
+:- module(ptree,[print_tree/1],[assertions,isomodes]).
 /* Print term as a tree */
 
 :- use_module(library(streams)).
@@ -7,18 +6,19 @@
 
 :- include('../chatops').
 
-/*
- :- mode print_tree(+).
- :- mode pt(+,+).
- :- mode pl(+,+).
- :- mode as_is(+).
-*/
 
+% :- mode print_tree(+).
+% :- mode pt(+,+).
+% :- mode pl(+,+).
+% :- mode as_is(+).
+
+:- pred print_tree(+).
 print_tree(T) :-
    numbervars(T,1,_),
    pt(T,0), nl, fail.
 print_tree(_).
 
+:- pred pt(+,+).
 pt(A,I) :-
    as_is(A), !,
    tab(I), write(A), nl.
@@ -31,11 +31,13 @@ pt(T,I) :- !,
    I0 is I+3,
    pl(As,I0).
 
+:- pred pl(+,+).
 pl([],_) :- !.
 pl([A|As],I) :- !,
    pt(A,I),
    pl(As,I).
 
+:- pred as_is(+).
 as_is(A) :- atomic(A), !.
 as_is('$VAR'(_)) :- !.
 as_is(X) :-

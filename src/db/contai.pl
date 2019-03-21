@@ -1,4 +1,4 @@
-:- module(contai, [contains/2], []).
+:- module(contai, [contains/2], [assertions,isomodes]).
 % Inversion of the 'in' relation.
 
 %% :- mode contains0(+,?).
@@ -6,6 +6,7 @@
 contains(X,Y) :- contains0(X,Y).
 contains(X,Y) :- contains0(X,W), contains(W,Y).
 
+:- pred contains0(+,?).
 contains0(africa,central_africa).
 contains0(africa,east_africa).
 contains0(africa,north_africa).

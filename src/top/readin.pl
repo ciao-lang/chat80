@@ -1,19 +1,28 @@
-:- module(readin,[ read_in/1, sentences/3 ],[ dcg ]).
+:- module(readin, [read_in/1, sentences/3],[assertions, dcg]).
 /* Read a sentence */
 
 :- use_module(engine(io_basic)).
 
-/*
- :- mode initread(-).
- :- mode readrest(+,-).
- :- mode word(-,?,?).
- :- mode words(-,?,?).
- :- mode alphanum(+,-).
- :- mode alphanums(-,?,?).
- :- mode digits(-,?,?).
- :- mode digit(+).
- :- mode lc(+,-).
-*/
+% :- mode initread(-).
+% :- mode readrest(+,-).
+% :- mode word(-,?,?).
+% :- mode words(-,?,?).
+% :- mode alphanum(+,-).
+% :- mode alphanums(-,?,?).
+% :- mode digits(-,?,?).
+% :- mode digit(+).
+% :- mode lc(+,-).
+
+:- pred initread(-).
+:- pred readrest(+,-).
+:- pred word(-,?,?).
+:- pred words(-,?,?).
+:- pred alphanum(+,-).
+:- pred alphanums(-,?,?).
+:- pred digits(-,?,?).
+:- pred digit(+).
+:- pred lc(+,-).
+
 
 /* Read sentence */
 read_in(P):-initread(L),words(P,L,[]),!,to_nl.
