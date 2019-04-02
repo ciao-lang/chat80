@@ -27,21 +27,21 @@
 
 :- pred aggregate(+,+,?).
 :- pred dimensioned(+).
-:- pred	one_of(+,?).
-:- pred	i_aggr(+,+,?).
-:- pred	u_aggr(+,+,?).
-:- pred	i_total(+,?).
-:- pred	i_maxs(+,?).
-:- pred	i_mins(+,?).
-:- pred	i_maxs0(+,+,+,?,?).
-:- pred	i_mins0(+,+,+,?,?).
-:- pred	u_total(+,?).
-:- pred	u_sum(+,+,?).
-:- pred	u_maxs(+,?).
-:- pred	u_mins(+,?).
-:- pred	i_maxs0(+,+,+,?,?).
-:- pred	i_mins0(+,+,+,?,?).
-:- pred	u_lt(+,+).
+:- pred one_of(+,?).
+:- pred i_aggr(+,+,?).
+:- pred u_aggr(+,+,?).
+:- pred i_total(+,?).
+:- pred i_maxs(+,?).
+:- pred i_mins(+,?).
+:- pred i_maxs0(+,+,+,?,?).
+:- pred i_mins0(+,+,+,?,?).
+:- pred u_total(+,?).
+:- pred u_sum(+,+,?).
+:- pred u_maxs(+,?).
+:- pred u_mins(+,?).
+:- pred i_maxs0(+,+,+,?,?).
+:- pred i_mins0(+,+,+,?,?).
+:- pred u_lt(+,+).
 
 aggregate(Fn,Set,Val) :-
    dimensioned(Set), !,

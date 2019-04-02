@@ -1,5 +1,4 @@
-
-:- module(slots,[ conc/3, i_sentence/2 ],[ ]).
+:- module(slots, [conc/3, i_sentence/2],[]).
 
 :- use_module(templa).
 :- use_module(newdic, [verb_type/2]).
@@ -81,8 +80,7 @@ i_rel(conj(Conj,Left,Right),X,
    i_rel(Left,X,LPred,`true,LQMods,[],[],-Id),
    i_rel(Right,X,RPred,`true,RQMods,[],Up,+Id).
 
-i_np_mod(pp(Prep,NP),
-      X,Slots0,Slots,Pred,Pred,[QMod|QMods],QMods,Up,Id0,Index0) :-
+i_np_mod(pp(Prep,NP),X,Slots0,Slots,Pred,Pred,[QMod|QMods],QMods,Up,Id0,Index0) :-
    i_np_head(NP,Y,Q,LDet,LDet0,LX,LPred,LQMods,LSlots0,Id0),
    i_bind(Prep,Slots0,Slots1,X,Y,Id0,Function,P,PSlots,XArg),
    conc(PSlots,Slots1,Slots),

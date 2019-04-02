@@ -1,4 +1,4 @@
-:- module(readin, [read_in/1, sentences/3],[assertions, dcg]).
+:- module(readin, [read_in/1],[assertions, dcg]).
 /* Read a sentence */
 
 :- use_module(engine(io_basic)).

@@ -1,4 +1,4 @@
-:- module(top, [hi/0,control/3], [datafacts,assertions,isomodes]).
+:- module(top, [hi/0], [datafacts,assertions,isomodes]).
 % Chat-80 : A small subset of English for database querying.
 % New top for WWW inteface (MH)
 
@@ -38,17 +38,13 @@ hi :-
        ; hi ).
 
 % Changed from failing by default, fixed output M.H.
-control([bye,'.'],"Cheerio.",[]) :- 
-	!.
+control([bye,'.'],"Cheerio.",[]) :- !.
 control([trace,'.'],"Tracing from now on!",[]) :-
-	tracing `= on,
-	!.
+	tracing `= on, !.
 control([do,not,trace,'.'],"No longer tracing.",[]) :-
-	tracing `= off,
-        !.
+	tracing `= off, !.
 control(U,A,T) :-
-	check_words(U,[]),
-	!,
+	check_words(U,[]), !,
 	process(U,A,T).
 control(U,L,[]) :-
 	check_words(U,WrongWords),
@@ -225,8 +221,8 @@ exquant('$VAR'(I),V,M,P0,P) :-
 irev(I,J,I,J) :- I>J, !.
 irev(I,J,J,I).
 
-%% :- mode check_words(+,-).
-:- pred check_words(+,-).  %% This is false
+%% :- mode check_words(+,-).  %% This is false
+:- pred check_words(+,?). 
 
 %% M.H.
 check_words([],[]).
@@ -262,11 +258,13 @@ check_words([WrongWord|Words],[WrongWord|WrongWords]) :-
 chat_value(tracing,off).
 
 Var `= Val :-
-	( chat_value(Var,val(_))
-	-> retractall_fact(chat_value(Var,val(_)))
+	( chat_value(Var,val(_)) ->
+    retractall_fact(chat_value(Var,val(_)))
+    % chat_value(Var,val(Val))
 	 ; true ),
 	!,
 	asserta_fact(chat_value(Var,val(Val))).
+%  chat_value(Var,val(Val)).
 
 Var =: Val :-
 	chat_value(Var,val(Val)).
