@@ -1,13 +1,13 @@
 # Chat-80 port to Ciao
 
-This is a port of Chat-80 to Ciao packaged as a Ciao bundle. Usage:
+This is a port of Chat-80 to Ciao packaged as a Ciao bundle. It can
+be installed with:
 
-    $ ciao get github.com/jfmc/chat80
-    $ ~/.ciao/build/bin/chat80
+    $ ciao get github.com/ciao-lang/chat80
 
-You can install [Ciao](http://github.com/ciao-lang/ciao) directly from source
-or using Homebrew (`brew tap
-ciao-lang/ciao`, `brew install --HEAD ciao`).
+Then it can be started with:
+
+    $ chat80
 
 Chat-80 was a prototype natural language question answering system
 developed by David H. D. Warren and Fernando Pereira in 1982. See
