@@ -76,8 +76,8 @@ pre_apply(apply(F,P0),Det,X,P1,P2,Y,
    chain_apply(Quants,(F,P1),P3).
 pre_apply(aggr(F,Value,L,Head,Pred),Det,X,P1,P2,Y,Quants,
       quant(Det,X,
-            (S^(setof(Range:Domain,P,S),
-                aggregate(F,S,Value)),P2),Y)) :-
+        (S^(setof(Range:Domain,P,S),
+            aggregate(F,S,Value)),P2),Y)) :-
    close_tree(Pred,R),
    complete_aggr(L,Head,(R,P1),Quants,P,Range,Domain).
 
@@ -188,8 +188,8 @@ det_apply(quant(Det,Type-X,P,_-Y),Q0,Q) :-
 apply(generic,_,X,P,X,Q,X^(P,Q)).
 apply(proportion(_Type-V),_,X,P,Y,Q,
       S^(setof(X,P,S),
-         N^(numberof(Y,(one_of(S,Y),Q),N),
-            M^(card(S,M),ratio(N,M,V))))).
+     N^(numberof(Y,(one_of(S,Y),Q),N),
+        M^(card(S,M),ratio(N,M,V))))).
 apply(id,_,X,P,X,Q,(P,Q)).
 apply(void,_,X,P,X,Q,X^(P,Q)).
 apply(set,_,Index:X,P0,S,Q,S^(P,Q)) :-

@@ -1,5 +1,5 @@
 :- module(aggreg, [aggregate/3, one_of/2, ratio/3, card/2],
-        [assertions, isomodes]).
+    [assertions, isomodes]).
 
 :- use_module(library(lists), [length/2]).
 
@@ -9,21 +9,21 @@
 
 % :- mode aggregate(+,+,?),
 %         dimensioned(+),
-% 	one_of(+,?),
-% 	i_aggr(+,+,?),
-% 	u_aggr(+,+,?),
-% 	i_total(+,?),
-% 	i_maxs(+,?),
-% 	i_mins(+,?),
-% 	i_maxs0(+,+,+,?,?),
-% 	i_mins0(+,+,+,?,?),
-% 	u_total(+,?),
-% 	u_sum(+,+,?),
-% 	u_maxs(+,?),
-% 	u_mins(+,?),
-% 	i_maxs0(+,+,+,?,?),
-% 	i_mins0(+,+,+,?,?),
-% 	u_lt(+,+).
+%       one_of(+,?),
+%       i_aggr(+,+,?),
+%       u_aggr(+,+,?),
+%       i_total(+,?),
+%       i_maxs(+,?),
+%       i_mins(+,?),
+%       i_maxs0(+,+,+,?,?),
+%       i_mins0(+,+,+,?,?),
+%       u_total(+,?),
+%       u_sum(+,+,?),
+%       u_maxs(+,?),
+%       u_mins(+,?),
+%       i_maxs0(+,+,+,?,?),
+%       i_mins0(+,+,+,?,?),
+%       u_lt(+,+).
 
 :- pred aggregate(+,+,?).
 :- pred dimensioned(+).

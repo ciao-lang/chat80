@@ -389,20 +389,20 @@ reduced_rel(B,reduced_rel(C,D),E,F,G,H,I) :-
    close(O,G,P,I).
 
 reduced_wh(B,C,D,E,F,x(nogap,nonterminal,np(np(B,wh(C),[]),B,G,_H,_I,J,K),
-           x(nogap,nonterminal,verb_form(be,pres+fin,B,main),
-           x(nogap,nonterminal,neg(_L,M),
-           x(nogap,nonterminal,pred(M,N,O),P))))) :-
+       x(nogap,nonterminal,verb_form(be,pres+fin,B,main),
+       x(nogap,nonterminal,neg(_L,M),
+       x(nogap,nonterminal,pred(M,N,O),P))))) :-
    neg(_Q,M,D,R,F,S),
    pred(M,N,O,R,E,S,P),
    trace(J,K),
    subj_case(G).
 reduced_wh(B,C,D,E,F,x(nogap,nonterminal,np(np(B,wh(C),[]),B,G,_H,_I,J,K),
-           x(nogap,nonterminal,verb(L,_M,N,O),P))) :-
+       x(nogap,nonterminal,verb(L,_M,N,O),P))) :-
    participle(L,N,O,D,E,F,P),
    trace(J,K),
    subj_case(G).
 reduced_wh(B,C,D,E,F,x(nogap,nonterminal,np(G,H,I,J,_K,L,M),
-           x(gap,nonterminal,np(np(B,wh(C),[]),B,N,_O,_P,Q,R),S))) :-
+       x(gap,nonterminal,np(np(B,wh(C),[]),B,N,_O,_P,Q,R),S))) :-
    s_all(T),
    subj_case(I),
    verb_case(N),

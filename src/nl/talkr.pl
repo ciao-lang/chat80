@@ -74,13 +74,13 @@ complex(\+P) :- complex(P).
 
 respond([],"Nothing satisfies your question.").
 respond([A|L],Ans) :- 
-	respond_([A|L],Ans,[0'.]).
+    respond_([A|L],Ans,[0'.]).
 %% respond([]) :- write('Nothing satisfies your question.'), nl.
 %% respond([A|L]) :- reply(A), replies(L).
 
 respond_([A|L],Ans,Ansrs):-
-	reply(A,Ans,Ans0), 
-	replies(L,Ans0,Ansrs).
+    reply(A,Ans,Ans0), 
+    replies(L,Ans0,Ansrs).
 
 answer((answer([]):-E),A) :- !, holds(E,B), yesno(B,A).
 answer((answer([X]):-E),A) :- !, seto(X,E,S), respond(S,A).
@@ -99,35 +99,35 @@ yesno(false,"No.").
 
 replies([],R,R).
 replies([A],Ans,Ansrs) :- 
-	dlst(" and ",Ans,Ans1),
-	reply(A,Ans1,Ansrs).
+    dlst(" and ",Ans,Ans1),
+    reply(A,Ans1,Ansrs).
 replies([A|X],Ans,Ansrs) :- 
-	dlst(", ",Ans,Q1),
-	reply(A,Q1,Q2), 
-	replies(X,Q2,Ansrs).
+    dlst(", ",Ans,Q1),
+    reply(A,Q1,Q2), 
+    replies(X,Q2,Ansrs).
 %% replies([]) :- write('.').
 %% replies([A]) :- write(' and '), reply(A), write('.').
 %% replies([A|X]) :- write(', '), reply(A), replies(X).
 
 reply(N--U,A,As) :- 
-	!, 
-	name(N,Ns),
-	dlst(Ns,A,[0' |Q1]),
-	name(U,Us),
-	dlst(Us,Q1,As).
+    !, 
+    name(N,Ns),
+    dlst(Ns,A,[0' |Q1]),
+    name(U,Us),
+    dlst(Us,Q1,As).
 reply(X,A,As) :- 
-	atomic(X), !,
-	name(X,Xs),
-	dlst(Xs,A,As).
+    atomic(X), !,
+    name(X,Xs),
+    dlst(Xs,A,As).
 % PBC: What are the capitals of the countries bordering the Baltic?
 % returns a list of terms [...]:[...]
 reply([X|Xs],A,As) :- !,
-	respond_([X|Xs],A,As).
+    respond_([X|Xs],A,As).
 reply(X:Y,A,As) :- !,
-	dlst("for ",A,A0),
-	reply(X,A0,[C1,C2|A1]),
-	reply(Y,A1,As),
-	name(': ',[C1,C2]).
+    dlst("for ",A,A0),
+    reply(X,A0,[C1,C2|A1]),
+    reply(Y,A1,As),
+    name(': ',[C1,C2]).
 reply(X,A,A) :- throw(no_parsing(X)).
 %% reply(N--U) :- !, write(N), write(' '), write(U).
 %% reply(X) :- write(X).
@@ -168,8 +168,8 @@ pick([],_) :- !, fail.
 pick(X,X).
 
 dlst([X|Y],[X|R],E) :-
-	!,
-	dlst(Y,R,E).
+    !,
+    dlst(Y,R,E).
 dlst([],E,E).
 
 %% PBC

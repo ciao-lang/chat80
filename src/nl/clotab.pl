@@ -1,26 +1,26 @@
 
 :- module(clotab,
-	[
-	  adv/1,
-	  compl_case/1,
-	  empty/1,
-	  is_adv/1,
-	  is_pp/1,
-	  is_pred/1,
-	  minus/3,
-	  np_all/1,
-	  np_no_trace/1,
-	  plus/3,
-	  prep_case/1,
-	  role/3,
-	  s_all/1,
-	  subj_case/1,
-	  trace/1,
-	  trace/2,
-	  verb_case/1
-	],
-	[ % pure
-	]).
+    [
+      adv/1,
+      compl_case/1,
+      empty/1,
+      is_adv/1,
+      is_pp/1,
+      is_pred/1,
+      minus/3,
+      np_all/1,
+      np_no_trace/1,
+      plus/3,
+      prep_case/1,
+      role/3,
+      s_all/1,
+      subj_case/1,
+      trace/1,
+      trace/2,
+      verb_case/1
+    ],
+    [ % pure
+    ]).
 
 % Normal form masks
 

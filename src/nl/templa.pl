@@ -1,33 +1,33 @@
 
 :- module(templa,
-	[ adjunction/4,
-	  aggr_adj/4,
-	  aggr_noun/4,
-	  attribute/6,
-	  comparator/5,
-	  intrans/6,
-	  measure/4,
-	  meta_noun/7,
-	  name_template/2,
-	  property/9,
-	  restriction/4,
-	  sign/2,
-	  thing/6,
-	  trans/9,
-	  units/2
-	],
-	[
-	]).
+    [ adjunction/4,
+      aggr_adj/4,
+      aggr_noun/4,
+      attribute/6,
+      comparator/5,
+      intrans/6,
+      measure/4,
+      meta_noun/7,
+      name_template/2,
+      property/9,
+      restriction/4,
+      sign/2,
+      thing/6,
+      trans/9,
+      units/2
+    ],
+    [
+    ]).
 
 :- use_module(chat80(db/world0), 
-	[ circle_of_latitude/1,
-	  city/1,
-	  continent/1,
-	  country/1,
-	  region/1,
-	  river/1,
-	  seamass/1
-	]).
+    [ circle_of_latitude/1,
+      city/1,
+      continent/1,
+      country/1,
+      region/1,
+      river/1,
+      seamass/1
+    ]).
 
 
 :- include(chat80(chatops)).
@@ -36,13 +36,13 @@
 
 property(area,measure&area,X,feature&place&_,Y,area(Y,X),[],_,_).
 property(capital,feature&city,X,feature&place&country,Y,
-         capital(Y,X),[],_,_).
+     capital(Y,X),[],_,_).
 property(latitude,
-         measure&position,X,feature&_,Y,latitude(Y,X),[],_,_).
+     measure&position,X,feature&_,Y,latitude(Y,X),[],_,_).
 property(longitude,measure&position,X,feature&_,Y,
-         longitude(Y,X),[],_,_).
+     longitude(Y,X),[],_,_).
 property(population,
-         measure&heads,X,feature&_,Y,population(Y,X),[],_,_).
+     measure&heads,X,feature&_,Y,population(Y,X),[],_,_).
 
 thing(place,feature&place&_,X,place(X),[],_).
 thing(area,measure&area,X,area(X),[],_).
