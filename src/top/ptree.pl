@@ -6,12 +6,6 @@
 
 :- include('../chatops').
 
-
-% :- mode print_tree(+).
-% :- mode pt(+,+).
-% :- mode pl(+,+).
-% :- mode as_is(+).
-
 :- pred print_tree(+).
 print_tree(T) :-
    numbervars(T,1,_),

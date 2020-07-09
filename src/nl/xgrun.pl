@@ -1,15 +1,12 @@
-:- module(xgrun,[ terminal/5, virtual/3 ],[assertions,isomodes]).
+:- module(xgrun, [terminal/5, virtual/3], [assertions,isomodes]).
 
-% :- mode terminal(?,+,?,+,?),
-%         gap(+),
-%         virtual(+,+,?).
 
 :- pred terminal(?,+,?,+,?).
 terminal(T,S,S,x(_,terminal,T,X),X).
 terminal(T,[T|S],S,X,X) :-
    gap(X).
 
-:- pred gap(+),
+:- pred gap(+).
 gap(x(gap,_,_,_)).
 gap([]).
 

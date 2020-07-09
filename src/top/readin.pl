@@ -1,17 +1,7 @@
-:- module(readin, [read_in/1],[assertions, dcg]).
+:- module(readin, [read_in/1],[assertions, isomodes, dcg]).
 /* Read a sentence */
 
 :- use_module(engine(io_basic)).
-
-% :- mode initread(-).
-% :- mode readrest(+,-).
-% :- mode word(-,?,?).
-% :- mode words(-,?,?).
-% :- mode alphanum(+,-).
-% :- mode alphanums(-,?,?).
-% :- mode digits(-,?,?).
-% :- mode digit(+).
-% :- mode lc(+,-).
 
 :- pred initread(-).
 :- pred readrest(+,-).

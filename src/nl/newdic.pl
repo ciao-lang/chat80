@@ -25,8 +25,6 @@
     ],
     [assertions, isomodes]).
 
-:- use_module(engine(arithmetic), [(>)/2]).
-
 :- use_module(templa, [name_template/2]).
 
 :- include(chat80(chatops)).

@@ -301,5 +301,4 @@ op_apply(not,P,\+P).
 bubble(not,det(any),det(every)) :- !.
 bubble(_,D,D).
 
-
 conj_apply(and,P,Q,(P,Q)).

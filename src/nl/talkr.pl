@@ -1,4 +1,4 @@
-:- module(talkr,[ answer/2, dlst/3, satisfy/1, write_tree/1 ],[ ]).
+:- module(talkr, [answer/2, dlst/3, satisfy/1, write_tree/1],[assertions, isomodes]).
 /* Simplifying and executing the logical form of a NL query. */
 % Changed answer to return output in an argument. M.H.
 
@@ -11,15 +11,12 @@
 
 :- include(chat80(chatops)).
 
-/*
-:-mode write_tree(+).
-:-mode wt(+,+).
-:-mode header(+).
-:-mode decomp(+,-,-).
-:-mode complex(+).
-:-mode othervars(+,-,-).
-*/
-
+:- pred write_tree(+).
+:- pred wt(+,+).
+:- pred header(+).
+:- pred decomp(+,-,-).
+:- pred complex(+).
+:- pred othervars(+,-,-).
 
 write_tree(T):-
    numbervars(T,0,_),
@@ -59,18 +56,15 @@ complex(_^_).
 complex(\+P) :- complex(P).
 
 % Query execution.
-
-/*
-:-mode respond(?).
-:-mode holds(+,?).
-:-mode answer(+).
-:-mode yesno(+).         :-mode replies(+).
-:-mode reply(+).
-:-mode seto(?,+,-).
-:-mode satisfy(+).
-:-mode pickargs(+,+,+).
-:-mode pick(+,?).
-*/
+:- pred holds(+,?).
+:- pred answer(+,?).
+:- pred yesno(+,?).
+:- pred replies(+,?,?).
+:- pred reply(+,?,?).
+:- pred seto(?,+,-).
+:- pred satisfy(+).
+:- pred pickargs(+,+,+).
+:- pred pick(+,?).
 
 respond([],"Nothing satisfies your question.").
 respond([A|L],Ans) :- 

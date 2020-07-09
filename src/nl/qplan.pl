@@ -1,5 +1,5 @@
 
-:- module(qplan,[ qplan/2 ],[ ]).
+:- module(qplan, [qplan/2], [assertions,isomodes]).
 % qplan - supplies the control information (ie. sequencing and cuts) needed
 %         for efficient execution of a query.
 
@@ -10,42 +10,39 @@
 
 :- set_prolog_flag(multi_arity_warnings,off).
 
-/*
-:-mode
-   qplan(+,-),
-   qplan(+,+,-,-),
-   mark(+,-,+,-),
-   subquery(+,-,?,?,?,?),
-   negate(+,+,-),
-   negationcost(+,-),
-   setofcost(+,+,-),
-   variables(+,+,-),
-   variables(+,+,+,-),
-   quantificate(+,+,?,-),
-   log2(+,-),
-   schedule(+,+,-),
-   schedule1(+,+,-),
-   maybe_cut(+,+,?,-),
-   plan(+,+,+,+,-),
-   is_conjunction(+),
-   marked(+,?,?,?),
-   freevars(+,?),
-   best_goal(+,+,+,?,?,-),
-   instantiate(+,+,-),
-   instantiate0(+,+,-),
-   recombine(+,+,-),
-   incorporate(+,+,+,+,+,-),
-   incorporate0(+,+,+,+,-),
-   minimum(+,+,-),
-   add_keys(+,-),
-   strip_keys(+,-),
-   strip_key(+,?),
-   variablise(+,+,-),
-   variablise(+,+,+,+),
-   cost(+,+,-),
-   cost(+,+,+,+,-),
-   instantiated(+,+,-).
-*/
+:- pred qplan(+,-).
+:- pred qplan(+,+,-,-).
+:- pred mark(+,-,+,-).
+:- pred subquery(+,-,?,?,?,?).
+:- pred negate(+,+,-).
+:- pred negationcost(+,-).
+:- pred setofcost(+,+,-).
+:- pred variables(+,+,-).
+:- pred variables(+,+,+,-).
+:- pred quantificate(+,+,?,-).
+:- pred log2(+,-).
+:- pred schedule(+,+,-).
+:- pred schedule1(+,+,-).
+:- pred maybe_cut(+,+,?,-).
+:- pred plan(+,+,+,+,-).
+:- pred is_conjunction(+).
+:- pred marked(+,?,?,?).
+:- pred freevars(+,?).
+:- pred best_goal(+,+,+,?,?,-).
+:- pred instantiate(+,+,-).
+:- pred instantiate0(+,+,-,?).
+:- pred recombine(+,+,-).
+:- pred incorporate(+,+,+,+,+,-).
+:- pred incorporate0(+,+,+,+,-).
+:- pred minimum(+,+,-).
+:- pred add_keys(+,-).
+:- pred strip_keys(+,-).
+:- pred strip_key(+,?).
+:- pred variablise(+,+,-).
+:- pred variablise(+,+,+,+).
+:- pred cost(+,+,-).
+:- pred cost(+,+,+,+,-).
+:- pred instantiated(+,+,-).
 
 qplan((P:-Q),(P1:-Q1)) :- qplan(P,Q,P1,Q1), !.
 qplan(P,P).
@@ -279,17 +276,14 @@ precedes(G1,[G2|_]) :- goal_info(G1,_,N1), goal_info(G2,_,N2), N1 =< N2.
 
 -------------------------------------------------------------*/
 
-/*
-:-mode
-   nonempty(+),
-   setplus(+,+,-),
-   setminus(+,+,-),
-   mkset(+,+,-),
-   setplusitem(+,+,-),
-   setcontains(+,+),
-   intersect(+,+),
-   disjoint(+,+).
-*/
+:- pred nonempty(+).
+:- pred setplus(+,+,-).
+:- pred setminus(+,+,-).
+:- pred mkset(+,+,-).
+:- pred setplusitem(+,+,-).
+:- pred setcontains(+,+).
+:- pred intersect(+,+).
+:- pred disjoint(+,+).
 
 nonempty(0) :- !, fail.
 nonempty(_).
