@@ -47,7 +47,7 @@ decomp(numberof(X,P,N),[N,=,numberof,X],P).
 decomp(X^P,[exists,X|XX],P1) :- othervars(P,XX,P1).
 
 % :- pred othervars(+,-,-).
-:- pred othervars/3 : nonvar * nonvar * var => ground * ground * ground.
+:- pred othervars/3 : nonvar * var * var => ground * ground * ground.
 othervars(X^P,[X|XX],P1) :- !, othervars(P,XX,P1).
 othervars(P,[],P).
 

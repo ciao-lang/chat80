@@ -1,4 +1,4 @@
-:- module(newerg, [sentence/5], []).
+:- module(newerg, [sentence/5], [assertions]).
 
 :- use_module(clotab).
 :- use_module(newdic).
@@ -8,6 +8,7 @@
 
 :- set_prolog_flag(multi_arity_warnings,off).
 
+:- pred sentence(A,B,C,D,E) : var * nonvar * ground * ground * ground.
 sentence(B,C,D,E,F) :-
    declarative(B,C,G,E,H),
    terminator(.,G,D,H,F).

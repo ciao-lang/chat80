@@ -9,7 +9,7 @@
       river/1,
       seamass/1
     ],
-    []).
+    [assertions]).
 % Data for the World Database.
 %% Changed in to is_in to avoid name clashes with linda interface M.H.
 
@@ -31,6 +31,7 @@
 % Interface.
 % ---------
 
+:- pred database/1 : nonvar => ground.
 database(aggregate(X,Y,Z)) :- aggregate(X,Y,Z).
 database(one_of(X,Y)) :- one_of(X,Y).
 database(ratio(X,Y,Z)) :- ratio(X,Y,Z).

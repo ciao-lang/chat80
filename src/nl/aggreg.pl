@@ -78,8 +78,8 @@ i_maxs0([U:X|R],V,_,L,W) :-
 i_maxs0([_|R],V,L0,L,W) :-
    i_maxs0(R,V,L0,L,W).
 
-% :- pred i_mins(+,?).
-:- pred i_mins/2 : nonvar * nonvar => ground * ground.
+% :- pred i_mins(+,-).
+:- pred i_mins/2 : nonvar * var => ground * ground.
 i_mins([V:X|Set],List) :-
    i_mins0(Set,V,[X],List,_).
 

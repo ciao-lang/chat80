@@ -222,7 +222,7 @@ irev(I,J,I,J) :- I>J, !.
 irev(I,J,J,I).
 
 % :- pred check_words(+,?). 
-:- pred check_words(A,B) : nonvar(A).
+:- pred check_words(A,B) : nonvar(A) => ground * ground.
 %% M.H.
 check_words([],[]).
 check_words([Word|Words],WrongWords) :-
