@@ -1,4 +1,3 @@
-
 :- module(templa,
     [ adjunction/4,
       aggr_adj/4,
@@ -16,19 +15,10 @@
       trans/9,
       units/2
     ],
-    [
-    ]).
+    [assertions]).
 
-:- use_module(chat80(db/world0), 
-    [ circle_of_latitude/1,
-      city/1,
-      continent/1,
-      country/1,
-      region/1,
-      river/1,
-      seamass/1
-    ]).
-
+:- use_module(chat80(db/world0), [ circle_of_latitude/1, city/1, continent/1,
+    country/1, region/1, river/1, seamass/1 ]).
 
 :- include(chat80(chatops)).
 
@@ -67,7 +57,8 @@ aggr_noun(total,_,_,total).
 meta_noun(number,_,V,feature&_,X,P,numberof(X,P,V)).
 
 /* Proper nouns */
-
+% :- pred name_template(+,-).
+:- pred name_template(A,B) : nonvar(A) => ground * ground.
 name_template(X,feature&circle) :- circle_of_latitude(X).
 name_template(X,feature&city) :- city(X).
 name_template(X,feature&place&continent) :- continent(X).

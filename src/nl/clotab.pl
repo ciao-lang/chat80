@@ -1,4 +1,3 @@
-
 :- module(clotab,
     [
       adv/1,

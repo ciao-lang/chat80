@@ -120,7 +120,7 @@ report(_,_,_,_).
 
 report_item(none,_).
 report_item(expr,Item) :-
-    write_tree(Item), nl.
+    write_tree(Item), nl. 
 report_item(tree,Item) :-
     print_tree(Item), nl.
 report_item(quant,Item) :-
@@ -221,9 +221,8 @@ exquant('$VAR'(I),V,M,P0,P) :-
 irev(I,J,I,J) :- I>J, !.
 irev(I,J,J,I).
 
-%% :- mode check_words(+,-).  %% This is false
-:- pred check_words(+,?). 
-
+% :- pred check_words(+,?). 
+:- pred check_words(A,B) : nonvar(A).
 %% M.H.
 check_words([],[]).
 check_words([Word|Words],WrongWords) :-
@@ -233,9 +232,7 @@ check_words([Word|Words],WrongWords) :-
 check_words([WrongWord|Words],[WrongWord|WrongWords]) :-
     check_words(Words,WrongWords).
 
-%% :- mode check_word(+,-).
 %% :- pred check_word(+,-).
-
 %% M.H.
 %% check_word(Word,Word) :- word(Word).
 %% check_word(Word,NewWord) :-
@@ -249,14 +246,11 @@ check_words([WrongWord|Words],[WrongWord|WrongWords]) :-
 
 %% Uurgh... Changed to use assert. M.H. 
 
-%% :- mode `=(+,+), =+(+,-), =:(+,?).
-:- pred '`='(+,+).
-%% :- pred '=+'(+,-).
-:- pred '=:'(+,?).
-
 :- data chat_value/2.
 chat_value(tracing,off).
 
+% :- pred '`='(+,+).
+:- pred '`='/2 : nonvar * nonvar.
 Var `= Val :-
     ( chat_value(Var,val(_)) ->
     retractall_fact(chat_value(Var,val(_)))
@@ -266,6 +260,8 @@ Var `= Val :-
     asserta_fact(chat_value(Var,val(Val))).
 %  chat_value(Var,val(Val)).
 
+% :- pred '=:'(+,?).
+:- pred '=:'(A,B) : nonvar(A).
 Var =: Val :-
     chat_value(Var,val(Val)).
 

@@ -1,4 +1,3 @@
-
 :- module(scopes,[ clausify/2 ],[ ]).
 
 :- use_module(slots, [conc/3]).

@@ -1,4 +1,3 @@
-
 :- module(newdic,
     [ '`'/1,
       adj/2,
@@ -31,67 +30,11 @@
 
 :- set_prolog_flag(discontiguous_warnings,off).
 
-% Modes
-% :- mode word(+).
-% :- mode `(+).
-% :- mode conj(+).
-% :- mode adverb(+).
-% :- mode sup_adj(+,?).
-% :- mode rel_adj(+,?).
-% :- mode adj(+,?).
-% :- mode name_template(+,-).
-% :- mode name(+).
-% :- mode terminator(+,?).
-% :- mode pers_pron(+,?,?,?,?).
-% :- mode poss_pron(+,?,?,?).
-% :- mode rel_pron(+,?).
-% :- mode regular_past(+,?).
-% :- mode regular_pres(+).
-% :- mode verb_root(+).
-% :- mode verb_form(+,?,?,?).
-% :- mode noun_sin(+).
-% :- mode noun_plu(+,?).
-% :- mode noun_form(+,?,?).
-% :- mode prep(+).
-% :- mode quantifier_pron(+,?,?).
-% :- mode tr_number(+,?).
-% :- mode number(+,?,?).
-% :- mode det(+,?,?,?).
-% :- mode int_art(+,?,?,?).
-% :- mode int_pron(+,?).
-
-:- pred word(+).
-:- pred `(+).
-:- pred conj(+).
-:- pred adverb(+).
-:- pred sup_adj(+,?).
-:- pred rel_adj(+,?).
-:- pred adj(+,?).
-:- pred name_template(+,-).
-:- pred name(+).
-:- pred terminator(+,?).
-:- pred pers_pron(+,?,?,?,?).
-:- pred poss_pron(+,?,?,?).
-:- pred rel_pron(+,?).
-:- pred regular_past(+,?).
-:- pred regular_pres(+).
-:- pred verb_root(+).
-:- pred verb_form(+,?,?,?).
-:- pred noun_sin(+).
-:- pred noun_plu(+,?).
-:- pred noun_form(+,?,?).
-:- pred prep(+).
-:- pred quantifier_pron(+,?,?).
-:- pred tr_number(+,?).
-:- pred number(+,?,?).
-:- pred det(+,?,?,?).
-:- pred int_art(+,?,?,?).
-:- pred int_pron(+,?).
-
-
 % =================================================================
 % General Dictionary
 
+% :- pred word(+).
+:- pred word/1  : nonvar => ground.
 word(Word) :- `(Word).
 word(Word) :- conj(Word).
 word(Word) :- adverb(Word).
@@ -113,6 +56,8 @@ word(Word) :- int_art(Word,_,_,_).
 word(Word) :- int_pron(Word,_).
 word(Word) :- loc_pred(Word,_).
 
+% :- pred `(+).
+:- pred '`'/1 : nonvar => ground.
 `how.
 `whose.
 `there.
@@ -133,17 +78,26 @@ word(Word) :- loc_pred(Word,_).
 `many.
 `where.
 `when.
+
+% :- pred conj(+).
+:- pred conj/1 : nonvar => ground.
 conj(and).
 conj(or).
 
+% :- pred int_pron(+,?).
+:- pred int_pron(A,B)  : nonvar(A) => ground * ground.
 int_pron(what,undef).
 int_pron(which,undef).
 int_pron(who,subj).
 int_pron(whom,compl).
 
+% :- pred int_art(+,?,?,?).
+:- pred int_art(A,B,C,D) : nonvar(A).
 int_art(what,X,_,int_det(X)).
 int_art(which,X,_,int_det(X)).
 
+% :- pred det(+,?,?,?).
+:- pred det(A,B,C,D) : nonvar(A) => (ground(A), ground(D)).
 det(the,No,the(No),def).
 det(a,sin,a,indef).
 det(an,sin,a,indef).
@@ -154,10 +108,14 @@ det(all,plu,all,indef).
 det(each,sin,each,indef).
 det(no,_,no,indef).
 
+% :- pred number(+,?,?).
+:- pred number(A,B,C) : nonvar(A).
 number(W,I,Nb) :-
    tr_number(W,I),
    ag_number(I,Nb).
 
+% :- pred tr_number(+,?).
+:- pred tr_number(A,B) : nonvar(A).
 tr_number(nb(I),I).
 tr_number(one,1).
 tr_number(two,2).
@@ -173,6 +131,8 @@ tr_number(ten,10).
 ag_number(1,sin).
 ag_number(N,plu) :- N>1.
 
+% :- pred quantifier_pron(+,?,?).
+:- pred quantifier_pron(A,B,C) : nonvar(A) => ground * ground * ground.
 quantifier_pron(everybody,every,person).
 quantifier_pron(everyone,every,person).
 quantifier_pron(everything,every,thing).
@@ -185,6 +145,8 @@ quantifier_pron(anything,any,thing).
 quantifier_pron(nobody,no,person).
 quantifier_pron(nothing,no,thing).
 
+% :- pred prep(+).
+:- pred prep/1 : nonvar => ground.
 prep(as).
 prep(at).
 prep(of).
@@ -197,9 +159,13 @@ prep(from).
 prep(into).
 prep(through).
 
+% :- pred noun_form(+,?,?).
+:- pred noun_form(A,B,C) : nonvar(A) => ground(C).
 noun_form(Plu,Sin,plu) :- noun_plu(Plu,Sin).
 noun_form(Sin,Sin,sin) :- noun_sin(Sin).
 
+% :- pred verb_form(+,?,?,?).
+:- pred verb_form(A,B,C,D) : nonvar(A).
 verb_form(V,V,inf,_) :- verb_root(V).
 verb_form(V,V,pres+fin,Agmt) :-
    regular_pres(V),
@@ -213,6 +179,8 @@ root_form(2+_).
 root_form(1+plu).
 root_form(3+plu).
 
+% :- pred verb_root(+).
+:- pred verb_root/1 : nonvar => ground.
 verb_root(be).
 verb_root(have).
 verb_root(do).
@@ -230,8 +198,12 @@ verb_form(being,be,pres+part,_).
 
 verb_type(be,aux+be).
 
+% :- pred regular_pres(+).
+:- pred regular_pres/1 : nonvar => ground.
 regular_pres(have).
 
+% :- pred regular_past(+,?).
+:- pred regular_past(A,B) : nonvar(A) => ground * ground.
 regular_past(had,have).
 
 verb_form(has,have,pres+fin,3+sin).
@@ -248,10 +220,14 @@ verb_form(done,do,past+part,_).
 
 verb_type(do,aux+ditrans).
 
+% :- pred rel_pron(+,?).
+:- pred rel_pron(A,B) : nonvar(A) => ground * ground.
 rel_pron(who,subj).
 rel_pron(whom,compl).
 rel_pron(which,undef).
 
+% :- pred poss_pron(+,?,?,?).
+:- pred poss_pron(A,B,C,D) : nonvar(A) => (ground(A), ground(C)).
 poss_pron(my,_,1,sin).
 poss_pron(your,_,2,_).
 poss_pron(his,masc,3,sin).
@@ -260,6 +236,8 @@ poss_pron(its,neut,3,sin).
 poss_pron(our,_,1,plu).
 poss_pron(their,_,3,plu).
 
+% :- pred pers_pron(+,?,?,?,?).
+:- pred pers_pron(A,B,C,D,E) : nonvar(A) => (ground(A), ground(C)).
 pers_pron(i,_,1,sin,subj).
 pers_pron(you,_,2,_,_).
 pers_pron(he,masc,3,sin,subj).
@@ -273,10 +251,14 @@ pers_pron(her,fem,3,sin,compl(_)).
 pers_pron(us,_,1,plu,compl(_)).
 pers_pron(them,_,3,plu,compl(_)).
 
+% :- pred terminator(+,?).
+:- pred sup_adj(A,B) : nonvar(A) => ground(A).
 terminator(.,_).
 terminator(?,?).
 terminator(!,!).
 
+% :- pred name(+).
+:- pred name/1 : nonvar => ground.
 name(Name) :-
    name_template(Name,_), !.
 
@@ -288,6 +270,8 @@ loc_pred(west,prep(westof)).
 loc_pred(north,prep(northof)).
 loc_pred(south,prep(southof)).
 
+% :- pred adj(+,?).
+:- pred adj(A,B) : nonvar(A) => ground * ground.
 adj(minimum,restr).
 adj(maximum,restr).
 adj(average,restr).
@@ -304,6 +288,8 @@ adj(old,quant).
 adj(new,quant).
 adj(populous,quant).
 
+% :- pred rel_adj(+,?).
+:- pred rel_adj(A,B) : nonvar(A) => ground * ground.
 rel_adj(greater,great).
 rel_adj(less,small).
 rel_adj(bigger,big).
@@ -312,6 +298,8 @@ rel_adj(larger,large).
 rel_adj(older,old).
 rel_adj(newer,new).
 
+% :- pred sup_adj(+,?).
+:- pred sup_adj(A,B) : nonvar(A) => ground * ground.
 sup_adj(biggest,big).
 sup_adj(smallest,small).
 sup_adj(largest,large).
@@ -321,6 +309,8 @@ sup_adj(newest,new).
 noun_form(proportion,proportion,_).
 noun_form(percentage,percentage,_).
 
+% :- pred noun_sin(+).
+:- pred noun_sin/1 : nonvar => ground.
 noun_sin(average).
 noun_sin(total).
 noun_sin(sum).
@@ -347,6 +337,8 @@ noun_sin(sea).
 noun_sin(seamass).
 noun_sin(number).
 
+% :- pred noun_plu(+,?).
+:- pred noun_plu(A,B) : nonvar(A) => ground * ground.
 noun_plu(averages,average).
 noun_plu(totals,total).
 noun_plu(sums,sum).
@@ -365,7 +357,8 @@ noun_plu(countries,country).
 noun_plu(latitudes,latitude).
 noun_plu(longitudes,longitude).
 noun_plu(oceans,ocean).
-noun_plu(persons,person).  noun_plu(people,person).
+noun_plu(persons,person).
+noun_plu(people,person).
 noun_plu(populations,population).
 noun_plu(regions,region).
 noun_plu(rivers,river).
@@ -429,5 +422,7 @@ verb_form(flowing,flow,pres+part,_).
 
 verb_type(flow,main+intrans).
 
+% :- pred adverb(+).
+:- pred adverb/1 : nonvar => ground.
 adverb(yesterday).
 adverb(tomorrow).

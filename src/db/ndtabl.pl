@@ -1,14 +1,14 @@
-:- module(ndtabl, [nd/3, nd/4, nd/5], []).
+:- module(ndtabl, [nd/3, nd/4, nd/5], [assertions]).
 % NDTABL - Meta-information about database relations.
 
 :- set_prolog_flag(discontiguous_warnings,off).
 
-/*
-:-mode
-   nd(+,-,-),
-   nd(+,-,-,-),
-   nd(+,-,-,-,-).
-*/
+% :- pred nd(+,-,-).
+:- pred nd/3 : nonvar * var * var => ground * ground * ground.
+% :- pred nd(+,-,-,-).
+:- pred nd/4 : nonvar * var * var * var => ground * ground * ground * ground.
+% :- pred nd(+,-,-,-).
+:- pred nd/5 : nonvar * var * var * var * var => ground * ground * ground * ground * ground.
 
 nd(african,19,26).
 nd(american,19,26).

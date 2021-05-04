@@ -11,19 +11,16 @@
 
 :- include(chat80(chatops)).
 
-:- pred write_tree(+).
-:- pred wt(+,+).
-:- pred header(+).
-:- pred decomp(+,-,-).
-:- pred complex(+).
-:- pred othervars(+,-,-).
-
+% :- pred write_tree(+).
+:- pred write_tree/1 : nonvar => ground.
 write_tree(T):-
    numbervars(T,0,_),
    wt(T,0),
    fail.
 write_tree(_).
 
+% :- pred wt(+,+).
+:- pred wt/2 : ground * nonvar => ground * ground.
 wt((P:-Q),L) :- !, L1 is L+3,
    write(P), tab(1), write((:-)), nl,
    tab(L1), wt(Q,L1).
@@ -37,17 +34,25 @@ wt(E,L) :- decomp(E,H,P), !, L1 is L+2,
    tab(L1), wt(P,L1).
 wt(E,_) :- write(E).
 
+% :- pred header(+).
+:- pred header/1 : nonvar => ground.
 header([]).
 header([X|H]) :- write(X), tab(1), header(H).
 
+% :- pred decomp(+,-,-).
+:- pred decomp/3 : nonvar * var * var => ground * ground * ground.
 decomp(setof(X,P,S),[S,=,setof,X],P).  
 decomp(\+(P),[\+],P) :- complex(P).
 decomp(numberof(X,P,N),[N,=,numberof,X],P).
 decomp(X^P,[exists,X|XX],P1) :- othervars(P,XX,P1).
 
+% :- pred othervars(+,-,-).
+:- pred othervars/3 : nonvar * nonvar * var => ground * ground * ground.
 othervars(X^P,[X|XX],P1) :- !, othervars(P,XX,P1).
 othervars(P,[],P).
 
+% :- pred complex(+).
+:- pred complex/1 : var => ground.
 complex((_,_)).
 complex({_}).
 complex(setof(_,_,_)).
@@ -56,16 +61,6 @@ complex(_^_).
 complex(\+P) :- complex(P).
 
 % Query execution.
-:- pred holds(+,?).
-:- pred answer(+,?).
-:- pred yesno(+,?).
-:- pred replies(+,?,?).
-:- pred reply(+,?,?).
-:- pred seto(?,+,-).
-:- pred satisfy(+).
-:- pred pickargs(+,+,+).
-:- pred pick(+,?).
-
 respond([],"Nothing satisfies your question.").
 respond([A|L],Ans) :- 
     respond_([A|L],Ans,[0'.]).
@@ -76,21 +71,31 @@ respond_([A|L],Ans,Ansrs):-
     reply(A,Ans,Ans0), 
     replies(L,Ans0,Ansrs).
 
+% :- pred answer(+,?).
+:- pred answer(A,B) : nonvar(A) => ground * ground.
 answer((answer([]):-E),A) :- !, holds(E,B), yesno(B,A).
 answer((answer([X]):-E),A) :- !, seto(X,E,S), respond(S,A).
 answer((answer(X):-E),A) :- seto(X,E,S), respond(S,A).
 
+% :- pred seto(?,+,-).
+:- pred seto/3 : ground * ground * var => ground * ground * ground.
 seto(X,E,S) :- setof(X,satisfy(E),S), !.
 seto(_X,_E,[]).
 
+% :- pred holds(+,?).
+:- pred holds(A,B) : nonvar(A) => ground * ground.
 holds(E,true) :- satisfy(E), !.
 holds(_E,false).
 
+% :- pred yesno(+,?).
+:- pred yesno(A,B) : nonvar(A) => ground * ground.
 yesno(true,"Yes."). 
 yesno(false,"No."). 
 %% yesno(true) :- write('Yes.').
 %% yesno(false) :- write('No.').
 
+% :- pred replies(+,?,?).
+:- pred replies(A,B,C) : nonvar(A) => ground * ground * ground.
 replies([],R,R).
 replies([A],Ans,Ansrs) :- 
     dlst(" and ",Ans,Ans1),
@@ -103,6 +108,8 @@ replies([A|X],Ans,Ansrs) :-
 %% replies([A]) :- write(' and '), reply(A), write('.').
 %% replies([A|X]) :- write(', '), reply(A), replies(X).
 
+% :- pred reply(+,?,?).
+:- pred reply(A,B,C) : nonvar(A) => ground * ground * ground.
 reply(N--U,A,As) :- 
     !, 
     name(N,Ns),
@@ -126,6 +133,8 @@ reply(X,A,A) :- throw(no_parsing(X)).
 %% reply(N--U) :- !, write(N), write(' '), write(U).
 %% reply(X) :- write(X).
 
+% :- pred satisfy(+).
+:- pred satisfy/1 : nonvar => ground.
 satisfy((P,Q)) :- !, satisfy(P), satisfy(Q).
 satisfy({P}) :- !, satisfy(P), !.
 satisfy(_X^P) :- !, satisfy(P).
@@ -149,6 +158,8 @@ exceptionto(P) :-
 exception(P) :- database(P), !, fail.
 exception(_P).
 
+% :- pred pickargs(+,+,+).
+:- pred pickargs/3 : nonvar * nonvar * nonvar => ground * ground * ground.
 pickargs(0,_,_) :- !.
 pickargs(N,P,P1) :- N1 is N-1,
    arg(N,P,S),
@@ -156,6 +167,8 @@ pickargs(N,P,P1) :- N1 is N-1,
    arg(N,P1,X),
    pickargs(N1,P,P1).
 
+% :- pred pick(+,?).
+:- pred pick(A,B) : nonvar(A) => ground * ground.
 pick([X|_S],X).
 pick([_|S],X) :- !, pick(S,X).
 pick([],_) :- !, fail.
