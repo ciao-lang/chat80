@@ -8,7 +8,7 @@
 :- include(chat80(chatops)). 
 
 % :- pred aggregate(+,+,?).
-:- pred aggregate/3 : nonvar * nonvar * var => ground * ground * ground.
+:- pred aggregate(A,B,C) : (nonvar(A), nonvar(B)) => ground * ground * ground.
 aggregate(Fn,Set,Val) :-
    dimensioned(Set), !,
    u_aggr(Fn,Set,Val).
@@ -16,7 +16,7 @@ aggregate(Fn,Set,Val) :-
    i_aggr(Fn,Set,Val).
 
 % :- pred i_aggr(+,+,?).
-:- pred i_aggr/3 : nonvar * nonvar * var => ground * ground * ground.
+:- pred i_aggr(A,B,C) : (nonvar(A), nonvar(B)) => ground * ground * ground.
 i_aggr(average,Set,Val) :-
    i_total(Set,T),
    length(Set,N),

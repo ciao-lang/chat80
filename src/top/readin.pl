@@ -4,7 +4,7 @@
 :- use_module(engine(io_basic)).
 
 /* Read sentence */
-:- pred initread/1 => ground.
+:- pred read_in/1 => ground.
 read_in(P):-initread(L),words(P,L,[]),!,to_nl.
 
 % :- pred initread(-).

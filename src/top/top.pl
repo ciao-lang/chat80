@@ -84,7 +84,8 @@ chars(X,N) :- atomic(X), !,
     length(L,N).
 chars(_,2).
 
-%% This still has to be fixed: output into the extra argument (dlist) 
+:- pred process(U,A,T) : ground * var * var => ground(A).
+%% This still has to be fixed: output into the extra argument (dlist)
 %% T the tree etc. instead of simple writes. M.H. 
 process(U,A,_T) :-
     statistics(runtime,_),
