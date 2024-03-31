@@ -170,7 +170,7 @@ instantiate(P,Vi,[P]) :- freevars(P,V), disjoint(V,Vi), !.
 instantiate(m(V,_,P),Vi,L) :- instantiate0(P,V,Vi,L).
 
 % :- pred instantiate0(+,+,-,?).
-:- pred instantiate0(A,B,C,D) : (nonvar(A), nonvar(B),var(C)).
+:- pred instantiate0(A,B,C,D) : (nonvar(A), nonvar(B)).
 instantiate0((P1,P2),_,Vi,L) :-
    instantiate(P1,Vi,L1),
    instantiate(P2,Vi,L2),
@@ -357,4 +357,4 @@ intersect(V1,V2) :- V1 /\ V2 =\= 0.
 disjoint(W1-V1,W2-V2) :- !, V1 /\ V2 =:= 0, disjoint(W1,W2).
 disjoint(_W-V1,V2) :- !, V1 /\ V2 =:= 0.
 disjoint(V1,_W-V2) :- !, V1 /\ V2 =:= 0.
-disjoint(V1,V2) :- V1 /\ V2 =:= 0.
+disjoint(V1,V2) :- V1 /\ V2 =:= 0. 

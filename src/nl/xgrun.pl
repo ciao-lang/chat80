@@ -1,7 +1,7 @@
 :- module(xgrun, [terminal/5, virtual/3], [assertions]).
 
 % :- pred terminal(?,+,?,+,?).
-:- pred terminal(A,B,C,D,E) : (nonvar(B), nonvar(C)).
+:- pred terminal(A,B,C,D,E) : (nonvar(B), nonvar(D)).
 terminal(T,S,S,x(_,terminal,T,X),X).
 terminal(T,[T|S],S,X,X) :-
    gap(X).

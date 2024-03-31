@@ -12,7 +12,7 @@
 :- include(chat80(chatops)).
 
 % :- pred write_tree(+).
-:- pred write_tree/1 : nonvar => ground.
+:- pred write_tree/1 : nonvar.
 write_tree(T):-
    numbervars(T,0,_),
    wt(T,0),
@@ -52,7 +52,7 @@ othervars(X^P,[X|XX],P1) :- !, othervars(P,XX,P1).
 othervars(P,[],P).
 
 % :- pred complex(+).
-:- pred complex/1 : var => ground.
+:- pred complex/1 : nonvar => ground.
 complex((_,_)).
 complex({_}).
 complex(setof(_,_,_)).
@@ -72,13 +72,13 @@ respond_([A|L],Ans,Ansrs):-
     replies(L,Ans0,Ansrs).
 
 % :- pred answer(+,?).
-:- pred answer(A,B) : nonvar(A) => ground * ground.
+:- pred answer(A,B) : nonvar(A) => nonvar * nonvar.
 answer((answer([]):-E),A) :- !, holds(E,B), yesno(B,A).
 answer((answer([X]):-E),A) :- !, seto(X,E,S), respond(S,A).
 answer((answer(X):-E),A) :- seto(X,E,S), respond(S,A).
 
 % :- pred seto(?,+,-).
-:- pred seto/3 : ground * ground * var => ground * ground * ground.
+:- pred seto(A,B,C) : (nonvar(B), var(C)).
 seto(X,E,S) :- setof(X,satisfy(E),S), !.
 seto(_X,_E,[]).
 
@@ -95,7 +95,7 @@ yesno(false,"No.").
 %% yesno(false) :- write('No.').
 
 % :- pred replies(+,?,?).
-:- pred replies(A,B,C) : nonvar(A) => ground * ground * ground.
+:- pred replies(A,B,C) : nonvar(A) .
 replies([],R,R).
 replies([A],Ans,Ansrs) :- 
     dlst(" and ",Ans,Ans1),
@@ -109,7 +109,7 @@ replies([A|X],Ans,Ansrs) :-
 %% replies([A|X]) :- write(', '), reply(A), replies(X).
 
 % :- pred reply(+,?,?).
-:- pred reply(A,B,C) : nonvar(A) => ground * ground * ground.
+:- pred reply(A,B,C) : nonvar(A) .
 reply(N--U,A,As) :- 
     !, 
     name(N,Ns),
@@ -134,7 +134,7 @@ reply(X,A,A) :- throw(no_parsing(X)).
 %% reply(X) :- write(X).
 
 % :- pred satisfy(+).
-:- pred satisfy/1 : nonvar => ground.
+:- pred satisfy/1 : nonvar .
 satisfy((P,Q)) :- !, satisfy(P), satisfy(Q).
 satisfy({P}) :- !, satisfy(P), !.
 satisfy(_X^P) :- !, satisfy(P).
